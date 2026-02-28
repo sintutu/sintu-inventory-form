@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import java.time.Duration;
 import org.openqa.selenium.WebDriver;

@@ -1,10 +1,10 @@
-package Tests;
+package tests;
 
-import Pages.Harness;
-import Utilities.BrowserFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.Harness;
+import utilities.BrowserFactory;
 
 public abstract class BaseTest {
 
