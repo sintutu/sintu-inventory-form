@@ -14,7 +14,7 @@ public abstract class BaseTest {
 
   @BeforeMethod
   public void setUp() {
-    driver = new BrowserFactory().startBrowser("https://ndosisimplifiedautomation.vercel.app/");
+    driver = BrowserFactory.startBrowser("https://ndosisimplifiedautomation.vercel.app/");
     app = new Harness(driver);
   }
 
