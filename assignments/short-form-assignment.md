@@ -5,7 +5,7 @@
 1. [x] Login with your test user → Verify that you logged in.
 2. [x] Select Web Automation Advance tab → Inventory Form shown.
 3. [x] Select Device Type: Phone → Brand dropdown enabled.
-4. [ ] Select Brand: Apple → Device preview shown.
+4. [x] Select Brand: Apple → Device preview shown.
 5. [ ] Select Storage: 128GB → Unit price R480.00 displayed.
 6. [ ] Select Color: Blue → Color selection applied.
 7. [ ] Enter Quantity: 2 → Subtotal R960.00.

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +16,10 @@ public class DashboardPage extends BasePage {
   @SuppressWarnings("unused")
   @FindBy(xpath = "//p[normalize-space()=\"Here's an overview of your learning journey\"]")
   private WebElement dashboardSubtext;
+
+  public boolean dashboardWelcomeMessageDisplays() {
+    return wait.until(ExpectedConditions.visibilityOf(dashboardSubtext)).isDisplayed();
+  }
 
   @SuppressWarnings("unused")
   @FindBy(
@@ -44,16 +49,6 @@ public class DashboardPage extends BasePage {
   @FindBy(id = "brand")
   private WebElement brandDropdown;
 
-  private void selectDeviceType(String deviceType) {
-    Select select = new Select(deviceTypeDropdown);
-    select.selectByValue(deviceType);
-    System.out.println(select.getFirstSelectedOption().getText());
-  }
-
-  public boolean dashboardWelcomeMessageDisplays() {
-    return wait.until(ExpectedConditions.visibilityOf(dashboardSubtext)).isDisplayed();
-  }
-
   public boolean inventoryFormDisplays() {
     wait.until(ExpectedConditions.elementToBeClickable(learnNavigationButton)).click();
     wait.until(ExpectedConditions.elementToBeClickable(learningMaterialsButton)).click();
@@ -61,9 +56,27 @@ public class DashboardPage extends BasePage {
     return wait.until(ExpectedConditions.visibilityOf(inventoryFormHeading)).isDisplayed();
   }
 
-  public boolean selectDeviceTypeToEnableBrandDropdown() {
+  public boolean selectDeviceTypeToEnableBrandDropdown(String deviceType) {
     wait.until(ExpectedConditions.elementToBeClickable(deviceTypeDropdown));
-    selectDeviceType("phone");
+    selectFromDropdown(deviceTypeDropdown, deviceType.toLowerCase());
     return brandDropdown.isDisplayed();
+  }
+
+  public boolean selectBrandToShowDevicePreview(String brand) {
+    wait.until(ExpectedConditions.elementToBeClickable(brandDropdown));
+    selectFromDropdown(brandDropdown, brand.toLowerCase());
+    return getPreviewBrand(brand).isDisplayed();
+  }
+
+  private void selectFromDropdown(WebElement webElement, String deviceType) {
+    Select select = new Select(webElement);
+    select.selectByValue(deviceType);
+    System.out.println(select.getFirstSelectedOption().getText());
+  }
+
+  private WebElement getPreviewBrand(String brand) {
+    String previewXPath =
+        String.format("//div[@id='device-preview']//img[contains(@alt,'%s')]", brand);
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(previewXPath)));
   }
 }

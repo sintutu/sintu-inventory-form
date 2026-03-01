@@ -21,7 +21,11 @@ public class Harness {
     return new DashboardPage(driver).inventoryFormDisplays();
   }
 
-  public boolean selectDevice() {
-    return new DashboardPage(driver).selectDeviceTypeToEnableBrandDropdown();
+  public boolean selectDevice(String device) {
+    return new DashboardPage(driver).selectDeviceTypeToEnableBrandDropdown(device);
+  }
+
+  public boolean selectBrand(String brand) {
+    return new DashboardPage(driver).selectBrandToShowDevicePreview(brand);
   }
 }
