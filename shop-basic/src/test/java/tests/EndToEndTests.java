@@ -9,6 +9,7 @@ public class EndToEndTests extends BaseTest {
     Assert.assertTrue(app.login("sintutu@dev.com", "@987654321"), "User failed to log in");
     Assert.assertTrue(app.goToInventoryForm(), "Inventory Form should be visible");
     Assert.assertTrue(
-        app.selectDevice(), "Selecting Device Type phone should enable Brand dropdown.");
+        app.selectDevice("Phone"), "Selecting Device Type phone should enable Brand dropdown");
+    Assert.assertTrue(app.selectBrand("Apple"), "Selecting Brand should show device preview");
   }
 }
