@@ -16,4 +16,12 @@ public class Harness {
 
     return dashboardPage.dashboardWelcomeMessageDisplays();
   }
+
+  public boolean goToInventoryForm() {
+    return new DashboardPage(driver).inventoryFormDisplays();
+  }
+
+  public boolean selectDevice() {
+    return new DashboardPage(driver).selectDeviceTypeToEnableBrandDropdown();
+  }
 }
