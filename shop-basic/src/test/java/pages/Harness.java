@@ -38,4 +38,8 @@ public class Harness {
     // storage is unused since it's not clear where the price comes from.
     return new DashboardPage(driver).getUnitPrice();
   }
+
+  public String selectColour(String colour) {
+    return new DashboardPage(driver).selectColourToShowColourLabel(colour);
+  }
 }

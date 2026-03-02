@@ -13,5 +13,7 @@ public class EndToEndTests extends BaseTest {
     Assert.assertTrue(app.selectBrand("Apple"), "Selecting Brand should show device preview.");
     Assert.assertEquals(
         app.selectStorage("128GB"), app.getUnitPrice("128GB"), "Unit price is incorrect.");
+    Assert.assertEquals(
+        app.selectColour("Blue"), "Blue".toLowerCase(), "Colour displays incorrectly.");
   }
 }
