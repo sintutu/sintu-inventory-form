@@ -85,9 +85,9 @@ public class DashboardPage extends BasePage {
     return unitPrice.getText();
   }
 
-  private void selectFromDropdown(WebElement webElement, String deviceType) {
+  private void selectFromDropdown(WebElement webElement, String option) {
     Select select = new Select(webElement);
-    select.selectByValue(deviceType);
+    select.selectByValue(option);
     System.out.println(select.getFirstSelectedOption().getText());
   }
 
