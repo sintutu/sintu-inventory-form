@@ -28,4 +28,14 @@ public class Harness {
   public boolean selectBrand(String brand) {
     return new DashboardPage(driver).selectBrandToShowDevicePreview(brand);
   }
+
+  public String selectStorage(String storage) {
+    // storage is unused since it's not clear where the price comes from.
+    return new DashboardPage(driver).selectStorageReturnsUnitPrice();
+  }
+
+  public String getUnitPrice(String storage) {
+    // storage is unused since it's not clear where the price comes from.
+    return new DashboardPage(driver).getUnitPrice();
+  }
 }
