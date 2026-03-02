@@ -6,10 +6,12 @@ import org.testng.annotations.Test;
 public class EndToEndTests extends BaseTest {
   @Test
   public void loginPurchaseInvoice() {
-    Assert.assertTrue(app.login("sintutu@dev.com", "@987654321"), "User failed to log in");
-    Assert.assertTrue(app.goToInventoryForm(), "Inventory Form should be visible");
+    Assert.assertTrue(app.login("sintutu@dev.com", "@987654321"), "User failed to log in.");
+    Assert.assertTrue(app.goToInventoryForm(), "Inventory Form should be visible.");
     Assert.assertTrue(
-        app.selectDevice("Phone"), "Selecting Device Type phone should enable Brand dropdown");
-    Assert.assertTrue(app.selectBrand("Apple"), "Selecting Brand should show device preview");
+        app.selectDevice("Phone"), "Selecting Device Type phone should enable Brand dropdown.");
+    Assert.assertTrue(app.selectBrand("Apple"), "Selecting Brand should show device preview.");
+    Assert.assertEquals(
+        app.selectStorage("128GB"), app.getUnitPrice("128GB"), "Unit price is incorrect.");
   }
 }

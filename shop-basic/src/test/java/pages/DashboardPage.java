@@ -68,6 +68,23 @@ public class DashboardPage extends BasePage {
     return getPreviewBrand(brand).isDisplayed();
   }
 
+  @SuppressWarnings("unused")
+  @FindBy(id = "storage-128GB")
+  private WebElement storage128GBRadioButton;
+
+  @SuppressWarnings("unused")
+  @FindBy(css = "[data-testid='unit-price-value']")
+  private WebElement unitPrice;
+
+  public String selectStorageReturnsUnitPrice() {
+    wait.until(ExpectedConditions.elementToBeClickable(storage128GBRadioButton)).click();
+    return formatCurrency(480);
+  }
+
+  public String getUnitPrice() {
+    return unitPrice.getText();
+  }
+
   private void selectFromDropdown(WebElement webElement, String deviceType) {
     Select select = new Select(webElement);
     select.selectByValue(deviceType);
@@ -78,5 +95,9 @@ public class DashboardPage extends BasePage {
     String previewXPath =
         String.format("//div[@id='device-preview']//img[contains(@alt,'%s')]", brand);
     return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(previewXPath)));
+  }
+
+  private String formatCurrency(double amount) {
+    return String.format("R%.2f", amount);
   }
 }
