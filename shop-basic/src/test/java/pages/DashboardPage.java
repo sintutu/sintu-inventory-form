@@ -85,10 +85,29 @@ public class DashboardPage extends BasePage {
     return unitPrice.getText();
   }
 
-  private void selectFromDropdown(WebElement webElement, String deviceType) {
+  private String selectFromDropdown(WebElement webElement, String option) {
     Select select = new Select(webElement);
-    select.selectByValue(deviceType);
-    System.out.println(select.getFirstSelectedOption().getText());
+    select.selectByValue(option);
+    return select.getFirstSelectedOption().getText();
+  }
+
+  @SuppressWarnings("unused")
+  @FindBy(id = "color")
+  private WebElement deviceColourDropdown;
+
+  public String selectColourToShowColourLabel(String deviceColour) {
+    String colour = deviceColour.toLowerCase();
+    wait.until(ExpectedConditions.elementToBeClickable(deviceColourDropdown));
+
+    String selectedColor = selectFromDropdown(deviceColourDropdown, colour);
+
+    By previewColorLocator =
+        By.xpath(
+            String.format(
+                "//div[@id='device-preview']//strong[normalize-space()='%s']",
+                selectedColor.toLowerCase()));
+
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(previewColorLocator)).getText();
   }
 
   private WebElement getPreviewBrand(String brand) {
