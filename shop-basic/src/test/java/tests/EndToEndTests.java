@@ -1,5 +1,6 @@
 package tests;
 
+import models.PreviewDetails;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,5 +19,9 @@ public class EndToEndTests extends BaseTest {
     Assert.assertEquals(app.updateDeviceQuantity(2), app.getSubtotal(), "Subtotal is incorrect.");
     Assert.assertEquals(
         app.enterAddress("123 Test Street"), "123 Test Street", "Address is incorrect.");
+    Assert.assertEquals(
+        app.clickNextAndGetPreview("Apple", "Blue", "128GB"),
+        new PreviewDetails("Apple", "Blue".toLowerCase(), "128GB"),
+        "Preview does not show what was selected.");
   }
 }

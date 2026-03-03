@@ -1,5 +1,6 @@
 package pages;
 
+import models.PreviewDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -149,5 +150,61 @@ public class DashboardPage extends BasePage {
     addressInput.clear();
     addressInput.sendKeys(address);
     return addressInput.getAttribute("value");
+  }
+
+  @FindBy(css = "[data-testid='inventory-next-btn']")
+  private WebElement inventoryNextButton;
+
+  @FindBy(css = "[data-testid='device-preview-wrapper']")
+  private WebElement devicePreviewWrapper;
+
+  private By getPreviewBrandLocator(String brand) {
+    String previewXPath =
+        String.format(
+            "//div[@data-testid='device-preview-wrapper']//div[normalize-space()='%s']", brand);
+    return By.xpath(previewXPath);
+  }
+
+  private By getPreviewColourLocator(String colour) {
+    String previewXPath =
+        String.format(
+            "//div[@data-testid='device-preview-wrapper']//div[contains(., 'Color:')]//strong[normalize-space()='%s']",
+            colour.toLowerCase());
+    return By.xpath(previewXPath);
+  }
+
+  private By getPreviewStorageLocator(String storage) {
+    String previewXPath =
+        String.format(
+            "//div[@data-testid='device-preview-wrapper']//div[contains(., 'Storage:')]//strong[normalize-space()='%s']",
+            storage);
+    return By.xpath(previewXPath);
+  }
+
+  public PreviewDetails clickNextShowsOrderReview(
+      String selectedBrand, String selectedColour, String selectedStorage) {
+    inventoryNextButton.click();
+    wait.until(ExpectedConditions.visibilityOf(devicePreviewWrapper));
+
+    String brand =
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                    getPreviewBrandLocator(selectedBrand)))
+            .getText()
+            .trim();
+    String colour =
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                    getPreviewColourLocator(selectedColour)))
+            .getText()
+            .trim();
+    String storage =
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                    getPreviewStorageLocator(selectedStorage)))
+            .getText()
+            .trim();
+
+    return new PreviewDetails(brand, colour, storage);
   }
 }
