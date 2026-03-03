@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -118,5 +119,25 @@ public class DashboardPage extends BasePage {
 
   private String formatCurrency(double amount) {
     return String.format("R%.2f", amount);
+  }
+
+  @SuppressWarnings("unused")
+  @FindBy(css = "[data-testid='quantity-input']")
+  private WebElement quantityInput;
+
+  @SuppressWarnings("unused")
+  @FindBy(css = "[data-testid='subtotal-value']")
+  private WebElement subtotalValue;
+
+  public String subtotalUpdatesWhenEnteringQuantity(int quantity) {
+    wait.until(ExpectedConditions.elementToBeClickable(quantityInput));
+    quantityInput.clear();
+    quantityInput.sendKeys(String.valueOf(quantity));
+    quantityInput.sendKeys(Keys.TAB);
+    return formatCurrency(quantity * 480);
+  }
+
+  public String getSubtotal() {
+    return subtotalValue.getText();
   }
 }

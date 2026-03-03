@@ -8,7 +8,7 @@
 4. [x] Select Brand: Apple → Device preview shown.
 5. [x] Select Storage: 128GB → Unit price R480.00 displayed.
 6. [x] Select Color: Blue → Color selection applied.
-7. [ ] Enter Quantity: 2 → Subtotal R960.00.
+7. [x] Enter Quantity: 2 → Subtotal R960.00.
 8. [ ] Enter Address: "123 Test Street" → Address field filled.
 9. [ ] Click Next → Order preview displayed.
 10. [ ] Select Express Shipping → R25.00 added.

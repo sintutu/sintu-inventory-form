@@ -42,4 +42,12 @@ public class Harness {
   public String selectColour(String colour) {
     return new DashboardPage(driver).selectColourToShowColourLabel(colour);
   }
+
+  public String updateDeviceQuantity(int quantity) {
+    return new DashboardPage(driver).subtotalUpdatesWhenEnteringQuantity(quantity);
+  }
+
+  public String getSubtotal() {
+    return new DashboardPage(driver).getSubtotal();
+  }
 }
