@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EndToEndTests extends BaseTest {
-  @Test
+  @Test(groups = {"happy-path"})
   public void loginPurchaseInvoice() {
     Assert.assertTrue(app.login("sintutu@dev.com", "@987654321"), "User failed to log in.");
     Assert.assertTrue(app.goToInventoryForm(), "Inventory Form should be visible.");
@@ -15,5 +15,6 @@ public class EndToEndTests extends BaseTest {
         app.selectStorage("128GB"), app.getUnitPrice("128GB"), "Unit price is incorrect.");
     Assert.assertEquals(
         app.selectColour("Blue"), "Blue".toLowerCase(), "Colour displays incorrectly.");
+    Assert.assertEquals(app.updateDeviceQuantity(2), app.getSubtotal(), "Subtotal is incorrect.");
   }
 }
