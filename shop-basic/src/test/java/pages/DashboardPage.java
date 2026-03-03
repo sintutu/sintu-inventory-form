@@ -140,4 +140,14 @@ public class DashboardPage extends BasePage {
   public String getSubtotal() {
     return subtotalValue.getText();
   }
+
+  @SuppressWarnings("unused")
+  @FindBy(css = "[data-testid='address-input']")
+  private WebElement addressInput;
+
+  public String setAddress(String address) {
+    addressInput.clear();
+    addressInput.sendKeys(address);
+    return addressInput.getAttribute("value");
+  }
 }

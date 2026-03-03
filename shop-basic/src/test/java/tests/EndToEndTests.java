@@ -16,5 +16,7 @@ public class EndToEndTests extends BaseTest {
     Assert.assertEquals(
         app.selectColour("Blue"), "Blue".toLowerCase(), "Colour displays incorrectly.");
     Assert.assertEquals(app.updateDeviceQuantity(2), app.getSubtotal(), "Subtotal is incorrect.");
+    Assert.assertEquals(
+        app.enterAddress("123 Test Street"), "123 Test Street", "Address is incorrect.");
   }
 }

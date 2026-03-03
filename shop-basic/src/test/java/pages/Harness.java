@@ -50,4 +50,8 @@ public class Harness {
   public String getSubtotal() {
     return new DashboardPage(driver).getSubtotal();
   }
+
+  public String enterAddress(String address) {
+    return new DashboardPage(driver).setAddress(address);
+  }
 }
