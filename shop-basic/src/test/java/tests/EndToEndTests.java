@@ -23,5 +23,7 @@ public class EndToEndTests extends BaseTest {
         app.clickNextAndGetPreview("Apple", "Blue", "128GB"),
         new PreviewDetails("Apple", "Blue".toLowerCase(), "128GB"),
         "Preview does not show what was selected.");
+    Assert.assertEquals(
+        app.addExpressShipping(), "R985.00", "Express shipping cost miscalculated.");
   }
 }

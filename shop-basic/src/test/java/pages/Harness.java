@@ -59,4 +59,8 @@ public class Harness {
   public PreviewDetails clickNextAndGetPreview(String brand, String colour, String storage) {
     return new DashboardPage(driver).clickNextShowsOrderReview(brand, colour, storage);
   }
+
+  public String addExpressShipping() {
+    return new DashboardPage(driver).addExpressShippingIncreasesTotalCost();
+  }
 }

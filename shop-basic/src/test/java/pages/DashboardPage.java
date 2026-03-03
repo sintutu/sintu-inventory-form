@@ -80,7 +80,7 @@ public class DashboardPage extends BasePage {
 
   public String selectStorageReturnsUnitPrice() {
     wait.until(ExpectedConditions.elementToBeClickable(storage128GBRadioButton)).click();
-    return formatCurrency(480);
+    return formatCurrency(Constants.APPLE_PHONE_UNIT_PRICE);
   }
 
   public String getUnitPrice() {
@@ -135,7 +135,7 @@ public class DashboardPage extends BasePage {
     quantityInput.clear();
     quantityInput.sendKeys(String.valueOf(quantity));
     quantityInput.sendKeys(Keys.TAB);
-    return formatCurrency(quantity * 480);
+    return formatCurrency(quantity * Constants.APPLE_PHONE_UNIT_PRICE);
   }
 
   public String getSubtotal() {
@@ -206,5 +206,34 @@ public class DashboardPage extends BasePage {
             .trim();
 
     return new PreviewDetails(brand, colour, storage);
+  }
+
+  @FindBy(css = "[data-testid='shipping-express']")
+  private WebElement expressShippingRadioButton;
+
+  @FindBy(css = "[data-testid='breakdown-subtotal-value']")
+  private WebElement breakdownSubtotalValue;
+
+  @FindBy(css = "[data-testid='breakdown-shipping-value']")
+  private WebElement breakdownShippingValue;
+
+  @FindBy(css = "[data-testid='breakdown-total-value']")
+  private WebElement breakdownTotalValue;
+
+  public String addExpressShippingIncreasesTotalCost() {
+    expressShippingRadioButton.click();
+    wait.until(
+        ExpectedConditions.textToBePresentInElement(
+            breakdownShippingValue, formatCurrency(Constants.EXPRESS_SHIPPING_COST)));
+    double total =
+        parseCurrency(breakdownSubtotalValue.getText())
+            + parseCurrency(breakdownShippingValue.getText());
+    wait.until(
+        ExpectedConditions.textToBePresentInElement(breakdownTotalValue, formatCurrency(total)));
+    return breakdownTotalValue.getText();
+  }
+
+  private double parseCurrency(String text) {
+    return Double.parseDouble(text.replace("R", "").trim());
   }
 }
