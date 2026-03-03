@@ -1,5 +1,6 @@
 package pages;
 
+import models.PreviewDetails;
 import org.openqa.selenium.WebDriver;
 
 public class Harness {
@@ -53,5 +54,9 @@ public class Harness {
 
   public String enterAddress(String address) {
     return new DashboardPage(driver).setAddress(address);
+  }
+
+  public PreviewDetails clickNextAndGetPreview(String brand, String colour, String storage) {
+    return new DashboardPage(driver).clickNextShowsOrderReview(brand, colour, storage);
   }
 }
