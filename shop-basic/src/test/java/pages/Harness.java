@@ -71,4 +71,8 @@ public class Harness {
   public String useSAVE10discountCode() {
     return new DashboardPage(driver).applyDiscount();
   }
+
+  public String confirmPurchase() {
+    return new DashboardPage(driver).confirmPurchaseShowsSuccessToast();
+  }
 }
