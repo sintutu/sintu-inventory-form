@@ -67,4 +67,8 @@ public class Harness {
   public String addOneYearWarranty() {
     return new DashboardPage(driver).addOneYearWarrantyIncreasesTotalCost();
   }
+
+  public String useSAVE10discountCode() {
+    return new DashboardPage(driver).applyDiscount();
+  }
 }
