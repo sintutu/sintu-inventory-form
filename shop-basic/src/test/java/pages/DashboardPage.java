@@ -1,18 +1,17 @@
 package pages;
 
 import models.PreviewDetails;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class DashboardPage extends BasePage {
+  private WebDriver driver;
 
   public DashboardPage(WebDriver driver) {
     super(driver);
+    this.driver = driver;
   }
 
   @SuppressWarnings("unused")
@@ -301,5 +300,22 @@ public class DashboardPage extends BasePage {
     confirmPurchaseButton.click();
     wait.until(ExpectedConditions.visibilityOf(successToast));
     return orderDetailsHeading.getText();
+  }
+
+  @FindBy(css = "[data-testid='view-history-btn']")
+  private WebElement viewInvoiceButton;
+
+  @FindBy(css = "[data-testid='invoice-history-panel']")
+  private WebElement invoiceHistoryPanel;
+
+  @FindBy(css = "[data-testid='invoice-history-title']")
+  private WebElement invoiceHistoryTitle;
+
+  public String clickInvoiceButtonShowsInvoiceHistory() {
+    ((JavascriptExecutor) driver)
+        .executeScript("arguments[0].scrollIntoView({block:'center'});", viewInvoiceButton);
+    wait.until(ExpectedConditions.elementToBeClickable(viewInvoiceButton)).click();
+    wait.until(ExpectedConditions.visibilityOf(invoiceHistoryPanel));
+    return invoiceHistoryTitle.getText();
   }
 }
