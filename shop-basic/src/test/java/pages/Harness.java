@@ -63,4 +63,8 @@ public class Harness {
   public String addExpressShipping() {
     return new DashboardPage(driver).addExpressShippingIncreasesTotalCost();
   }
+
+  public String addOneYearWarranty() {
+    return new DashboardPage(driver).addOneYearWarrantyIncreasesTotalCost();
+  }
 }
