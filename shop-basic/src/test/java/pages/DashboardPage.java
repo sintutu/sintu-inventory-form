@@ -221,13 +221,30 @@ public class DashboardPage extends BasePage {
   private WebElement breakdownTotalValue;
 
   public String addExpressShippingIncreasesTotalCost() {
+    double totalValue = parseCurrency(breakdownTotalValue.getText());
     expressShippingRadioButton.click();
     wait.until(
         ExpectedConditions.textToBePresentInElement(
             breakdownShippingValue, formatCurrency(Constants.EXPRESS_SHIPPING_COST)));
-    double total =
-        parseCurrency(breakdownSubtotalValue.getText())
-            + parseCurrency(breakdownShippingValue.getText());
+    double total = totalValue + parseCurrency(breakdownShippingValue.getText());
+    wait.until(
+        ExpectedConditions.textToBePresentInElement(breakdownTotalValue, formatCurrency(total)));
+    return breakdownTotalValue.getText();
+  }
+
+  @FindBy(css = "[data-testid='warranty-1yr']")
+  private WebElement oneYearWarrantyRadioButton;
+
+  @FindBy(css = "[data-testid='breakdown-warranty-value']")
+  private WebElement breakdownWarrantyValue;
+
+  public String addOneYearWarrantyIncreasesTotalCost() {
+    double totalValue = parseCurrency(breakdownTotalValue.getText());
+    oneYearWarrantyRadioButton.click();
+    wait.until(
+        ExpectedConditions.textToBePresentInElement(
+            breakdownWarrantyValue, formatCurrency(Constants.ONE_YEAR_WARRANTY_VALUE)));
+    double total = totalValue + parseCurrency(breakdownWarrantyValue.getText());
     wait.until(
         ExpectedConditions.textToBePresentInElement(breakdownTotalValue, formatCurrency(total)));
     return breakdownTotalValue.getText();
