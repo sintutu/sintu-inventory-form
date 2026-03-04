@@ -287,4 +287,19 @@ public class DashboardPage extends BasePage {
 
     return breakdownTotalValue.getText();
   }
+
+  @FindBy(css = "[data-testid='purchase-device-btn']")
+  private WebElement confirmPurchaseButton;
+
+  @FindBy(id = "purchase-success-toast")
+  private WebElement successToast;
+
+  @FindBy(xpath = "//div[@id='purchase-success-toast']//strong[normalize-space()='Order Details:']")
+  private WebElement orderDetailsHeading;
+
+  public String confirmPurchaseShowsSuccessToast() {
+    confirmPurchaseButton.click();
+    wait.until(ExpectedConditions.visibilityOf(successToast));
+    return orderDetailsHeading.getText();
+  }
 }
