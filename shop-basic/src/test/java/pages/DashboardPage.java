@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class DashboardPage extends BasePage {
   private WebDriver driver;
 
@@ -318,4 +321,25 @@ public class DashboardPage extends BasePage {
     wait.until(ExpectedConditions.visibilityOf(invoiceHistoryPanel));
     return invoiceHistoryTitle.getText();
   }
+
+    public void clickLatestInvoice() {
+
+        List<WebElement> invoices =
+            driver.findElements(By.cssSelector("[data-testid^='invoice-item-']"));
+
+        WebElement newestInvoice = invoices.stream()
+            .max(Comparator.comparingLong(invoice -> {
+                String invoiceText = invoice
+                    .findElement(By.cssSelector("[data-testid^='invoice-number']"))
+                    .getText();
+
+                String numericPart = invoiceText.replace("INV-", "");
+                return Long.parseLong(numericPart);
+            }))
+            .orElseThrow();
+
+        newestInvoice
+            .findElement(By.cssSelector("[data-testid^='view-invoice']"))
+            .click();
+    }
 }
