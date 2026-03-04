@@ -13,7 +13,7 @@
 9. [x] Click Next → Order preview displayed.
 10. [x] Select Express Shipping → R25.00 added.
 11. [x] Select 1yr Warranty → R49.00 added.
-12. [ ] Apply discount code SAVE10 → 10% off applied.
+12. [x] Apply discount code SAVE10 → 10% off applied.
 13. [ ] Click Confirm Purchase → Success toast with order details.
 14. [ ] Click View Invoice → Invoice history panel shown.
 15. [ ] Click View on invoice → Invoice opens with all order details.

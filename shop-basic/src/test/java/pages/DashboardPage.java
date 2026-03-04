@@ -253,4 +253,38 @@ public class DashboardPage extends BasePage {
   private double parseCurrency(String text) {
     return Double.parseDouble(text.replace("R", "").trim());
   }
+
+  @FindBy(css = "[data-testid='discount-code']")
+  private WebElement discountCodeInput;
+
+  @FindBy(css = "[data-testid='apply-discount-btn']")
+  private WebElement applyDiscountButton;
+
+  @FindBy(css = "[data-testid='breakdown-discount-label']")
+  private WebElement breakdownDiscountLabel;
+
+  @FindBy(css = "[data-testid='breakdown-discount-value']")
+  private WebElement breakdownDiscountValue;
+
+  public String applyDiscount() {
+    double total = parseCurrency(breakdownTotalValue.getText());
+
+    discountCodeInput.clear();
+    discountCodeInput.sendKeys(Constants.DISCOUNT_CODE);
+    applyDiscountButton.click();
+
+    wait.until(
+        ExpectedConditions.textToBePresentInElement(breakdownDiscountLabel, "Discount (10%)"));
+
+    double discount = total * 0.1;
+    total -= discount;
+
+    wait.until(
+        ExpectedConditions.textToBePresentInElement(
+            breakdownDiscountValue, formatCurrency(discount)));
+    wait.until(
+        ExpectedConditions.textToBePresentInElement(breakdownTotalValue, formatCurrency(total)));
+
+    return breakdownTotalValue.getText();
+  }
 }

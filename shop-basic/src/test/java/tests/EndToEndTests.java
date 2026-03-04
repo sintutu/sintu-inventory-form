@@ -26,5 +26,6 @@ public class EndToEndTests extends BaseTest {
     Assert.assertEquals(
         app.addExpressShipping(), "R985.00", "Express shipping cost miscalculated.");
     Assert.assertEquals(app.addOneYearWarranty(), "R1034.00", "Warranty cost miscalculated.");
+    Assert.assertEquals(app.useSAVE10discountCode(), "R930.60", "Discount miscalculated.");
   }
 }
