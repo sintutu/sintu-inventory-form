@@ -75,4 +75,8 @@ public class Harness {
   public String confirmPurchase() {
     return new DashboardPage(driver).confirmPurchaseShowsSuccessToast();
   }
+
+  public String viewInvoice() {
+    return new DashboardPage(driver).clickInvoiceButtonShowsInvoiceHistory();
+  }
 }
