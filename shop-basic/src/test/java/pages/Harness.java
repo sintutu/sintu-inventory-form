@@ -6,82 +6,82 @@ import org.openqa.selenium.WebDriver;
 
 public class Harness {
   private final WebDriver driver;
+  private DashboardPage dashboardPage;
 
   public Harness(WebDriver driver) {
     this.driver = driver;
+    dashboardPage = new DashboardPage(driver);
   }
 
   public boolean login(String username, String password) {
     new HomePage(driver).clickLogin();
     new PracticePage(driver).login(username, password);
-    DashboardPage dashboardPage = new DashboardPage(driver);
-
     return dashboardPage.dashboardWelcomeMessageDisplays();
   }
 
   public boolean goToInventoryForm() {
-    return new DashboardPage(driver).inventoryFormDisplays();
+    return dashboardPage.inventoryFormDisplays();
   }
 
   public boolean selectDevice(String device) {
-    return new DashboardPage(driver).selectDeviceTypeToEnableBrandDropdown(device);
+    return dashboardPage.selectDeviceTypeToEnableBrandDropdown(device);
   }
 
   public boolean selectBrand(String brand) {
-    return new DashboardPage(driver).selectBrandToShowDevicePreview(brand);
+    return dashboardPage.selectBrandToShowDevicePreview(brand);
   }
 
   public String selectStorage(String storage) {
     // storage is unused since it's not clear where the price comes from.
-    return new DashboardPage(driver).selectStorageReturnsUnitPrice();
+    return dashboardPage.selectStorageReturnsUnitPrice();
   }
 
   public String getUnitPrice(String storage) {
     // storage is unused since it's not clear where the price comes from.
-    return new DashboardPage(driver).getUnitPrice();
+    return dashboardPage.getUnitPrice();
   }
 
   public String selectColour(String colour) {
-    return new DashboardPage(driver).selectColourToShowColourLabel(colour);
+    return dashboardPage.selectColourToShowColourLabel(colour);
   }
 
   public String updateDeviceQuantity(int quantity) {
-    return new DashboardPage(driver).subtotalUpdatesWhenEnteringQuantity(quantity);
+    return dashboardPage.subtotalUpdatesWhenEnteringQuantity(quantity);
   }
 
   public String getSubtotal() {
-    return new DashboardPage(driver).getSubtotal();
+    return dashboardPage.getSubtotal();
   }
 
   public String enterAddress(String address) {
-    return new DashboardPage(driver).setAddress(address);
+    return dashboardPage.setAddress(address);
   }
 
   public PreviewDetails clickNextAndGetPreview(String brand, String colour, String storage) {
-    return new DashboardPage(driver).clickNextShowsOrderReview(brand, colour, storage);
+    return dashboardPage.clickNextShowsOrderReview(brand, colour, storage);
   }
 
   public String addExpressShipping() {
-    return new DashboardPage(driver).addExpressShippingIncreasesTotalCost();
+    return dashboardPage.addExpressShippingIncreasesTotalCost();
   }
 
   public String addOneYearWarranty() {
-    return new DashboardPage(driver).addOneYearWarrantyIncreasesTotalCost();
+    return dashboardPage.addOneYearWarrantyIncreasesTotalCost();
   }
 
   public String useSAVE10discountCode() {
-    return new DashboardPage(driver).applyDiscount();
+    return dashboardPage.applyDiscount();
   }
 
   public String confirmPurchase() {
-    return new DashboardPage(driver).confirmPurchaseShowsSuccessToast();
+    return dashboardPage.confirmPurchaseShowsSuccessToast();
   }
 
   public String viewInvoiceHistory() {
-    return new DashboardPage(driver).clickInvoiceButtonShowsInvoiceHistory();
+    return dashboardPage.clickInvoiceButtonShowsInvoiceHistory();
   }
 
   public Invoice viewLatestInvoice() {
-    return new DashboardPage(driver).openLatestInvoice();
+    return dashboardPage.openLatestInvoice();
   }
 }
