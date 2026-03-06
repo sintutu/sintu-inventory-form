@@ -14,14 +14,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class DashboardPage extends BasePage {
-  private WebDriver driver;
+  private final WebDriver driver;
 
   public DashboardPage(WebDriver driver) {
     super(driver);
     this.driver = driver;
   }
 
-  @SuppressWarnings("unused")
   @FindBy(xpath = "//p[normalize-space()=\"Here's an overview of your learning journey\"]")
   private WebElement dashboardSubtext;
 
@@ -29,31 +28,25 @@ public class DashboardPage extends BasePage {
     return wait.until(ExpectedConditions.visibilityOf(dashboardSubtext)).isDisplayed();
   }
 
-  @SuppressWarnings("unused")
   @FindBy(
       xpath =
           "//button[contains(@class,'nav-dropdown-trigger') and .//span[normalize-space(text())='Learn']]")
   private WebElement learnNavigationButton;
 
-  @SuppressWarnings("unused")
   @FindBy(
       xpath =
           "//button[contains(@class,'nav-dropdown-item') and .//span[normalize-space(text())='Learning Materials']]")
   private WebElement learningMaterialsButton;
 
-  @SuppressWarnings("unused")
   @FindBy(id = "tab-btn-web")
   private WebElement webAutomationAdvanceButton;
 
-  @SuppressWarnings("unused")
   @FindBy(id = "inventory-title")
   private WebElement inventoryFormHeading;
 
-  @SuppressWarnings("unused")
   @FindBy(id = "deviceType")
   private WebElement deviceTypeDropdown;
 
-  @SuppressWarnings("unused")
   @FindBy(id = "brand")
   private WebElement brandDropdown;
 
@@ -76,11 +69,9 @@ public class DashboardPage extends BasePage {
     return getPreviewBrand(brand).isDisplayed();
   }
 
-  @SuppressWarnings("unused")
   @FindBy(id = "storage-128GB")
   private WebElement storage128GBRadioButton;
 
-  @SuppressWarnings("unused")
   @FindBy(css = "[data-testid='unit-price-value']")
   private WebElement unitPrice;
 
@@ -99,7 +90,6 @@ public class DashboardPage extends BasePage {
     return select.getFirstSelectedOption().getText();
   }
 
-  @SuppressWarnings("unused")
   @FindBy(id = "color")
   private WebElement deviceColourDropdown;
 
@@ -124,11 +114,9 @@ public class DashboardPage extends BasePage {
     return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(previewXPath)));
   }
 
-  @SuppressWarnings("unused")
   @FindBy(css = "[data-testid='quantity-input']")
   private WebElement quantityInput;
 
-  @SuppressWarnings("unused")
   @FindBy(css = "[data-testid='subtotal-value']")
   private WebElement subtotalValue;
 
@@ -144,7 +132,6 @@ public class DashboardPage extends BasePage {
     return subtotalValue.getText();
   }
 
-  @SuppressWarnings("unused")
   @FindBy(css = "[data-testid='address-input']")
   private WebElement addressInput;
 
@@ -212,9 +199,6 @@ public class DashboardPage extends BasePage {
 
   @FindBy(css = "[data-testid='shipping-express']")
   private WebElement expressShippingRadioButton;
-
-  @FindBy(css = "[data-testid='breakdown-subtotal-value']")
-  private WebElement breakdownSubtotalValue;
 
   @FindBy(css = "[data-testid='breakdown-shipping-value']")
   private WebElement breakdownShippingValue;
