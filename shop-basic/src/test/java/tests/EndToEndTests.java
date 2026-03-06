@@ -1,11 +1,13 @@
 package tests;
 
+import io.qameta.allure.Feature;
 import models.Invoice;
 import models.PreviewDetails;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EndToEndTests extends BaseTest {
+  @Feature("happy-path")
   @Test(groups = {"happy-path"})
   public void loginPurchaseInvoice() {
     Assert.assertTrue(app.login("sintutu@dev.com", "@987654321"), "User failed to log in.");
