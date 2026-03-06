@@ -16,4 +16,4 @@
 12. [x] Apply discount code SAVE10 → 10% off applied.
 13. [x] Click Confirm Purchase → Success toast with order details.
 14. [x] Click View Invoice → Invoice history panel shown.
-15. [ ] Click View on invoice → Invoice opens with all order details.
+15. [x] Click View on invoice → Invoice opens with all order details.

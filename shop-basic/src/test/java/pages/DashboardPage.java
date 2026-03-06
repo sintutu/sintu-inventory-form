@@ -1,5 +1,12 @@
 package pages;
 
+import static utilities.Formatters.formatCurrency;
+import static utilities.Formatters.parseCurrency;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import models.Invoice;
 import models.PreviewDetails;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -115,10 +122,6 @@ public class DashboardPage extends BasePage {
     String previewXPath =
         String.format("//div[@id='device-preview']//img[contains(@alt,'%s')]", brand);
     return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(previewXPath)));
-  }
-
-  private String formatCurrency(double amount) {
-    return String.format("R%.2f", amount);
   }
 
   @SuppressWarnings("unused")
@@ -249,10 +252,6 @@ public class DashboardPage extends BasePage {
     return breakdownTotalValue.getText();
   }
 
-  private double parseCurrency(String text) {
-    return Double.parseDouble(text.replace("R", "").trim());
-  }
-
   @FindBy(css = "[data-testid='discount-code']")
   private WebElement discountCodeInput;
 
@@ -317,5 +316,47 @@ public class DashboardPage extends BasePage {
     wait.until(ExpectedConditions.elementToBeClickable(viewInvoiceButton)).click();
     wait.until(ExpectedConditions.visibilityOf(invoiceHistoryPanel));
     return invoiceHistoryTitle.getText();
+  }
+
+  private void clickLatestInvoice() {
+    wait.until(ExpectedConditions.visibilityOf(invoiceHistoryTitle));
+    List<WebElement> invoices = driver.findElements(By.xpath("//*[contains(text(),'INV-')]"));
+
+    WebElement newestInvoice =
+        invoices.stream()
+            .max(
+                Comparator.comparingLong(
+                    invoice -> {
+                      String invoiceText =
+                          invoice.findElement(By.xpath("//*[contains(text(),'INV-')]")).getText();
+
+                      String numericPart = invoiceText.replace("INV-", "");
+                      return Long.parseLong(numericPart);
+                    }))
+            .orElseThrow();
+    System.out.println(newestInvoice.getText());
+
+    By viewButtonDataTestId =
+        By.cssSelector(String.format("[data-testid='view-invoice-%s']", newestInvoice.getText()));
+    driver.findElement(viewButtonDataTestId).click();
+  }
+
+  private void switchToInvoiceTab() {
+    String originalTab = driver.getWindowHandle();
+
+    Set<String> allTabs = driver.getWindowHandles();
+
+    for (String tab : allTabs) {
+      if (!tab.equals(originalTab)) {
+        driver.switchTo().window(tab);
+        break;
+      }
+    }
+  }
+
+  public Invoice openLatestInvoice() {
+    clickLatestInvoice();
+    switchToInvoiceTab();
+    return new InvoicePage(driver).readInvoice();
   }
 }
