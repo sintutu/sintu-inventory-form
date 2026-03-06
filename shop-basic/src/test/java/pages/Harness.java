@@ -1,5 +1,6 @@
 package pages;
 
+import models.Invoice;
 import models.PreviewDetails;
 import org.openqa.selenium.WebDriver;
 
@@ -76,7 +77,11 @@ public class Harness {
     return new DashboardPage(driver).confirmPurchaseShowsSuccessToast();
   }
 
-  public String viewInvoice() {
+  public String viewInvoiceHistory() {
     return new DashboardPage(driver).clickInvoiceButtonShowsInvoiceHistory();
+  }
+
+  public Invoice viewLatestInvoice() {
+    return new DashboardPage(driver).openLatestInvoice();
   }
 }

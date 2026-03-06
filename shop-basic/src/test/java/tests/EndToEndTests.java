@@ -1,5 +1,6 @@
 package tests;
 
+import models.Invoice;
 import models.PreviewDetails;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -29,6 +30,10 @@ public class EndToEndTests extends BaseTest {
     Assert.assertEquals(app.useSAVE10discountCode(), "R930.60", "Discount miscalculated.");
     Assert.assertEquals(app.confirmPurchase(), "Order Details:", "Toast message incorrect.");
     Assert.assertEquals(
-        app.viewInvoice(), "\uD83D\uDCC4 Invoice History", "Invoice history not displayed.");
+        app.viewInvoiceHistory(), "\uD83D\uDCC4 Invoice History", "Invoice history not displayed.");
+    Assert.assertEquals(
+        app.viewLatestInvoice(),
+        new Invoice("Apple", 2, "R480.00", "R930.60"),
+        "Invoice is incorrect.");
   }
 }
