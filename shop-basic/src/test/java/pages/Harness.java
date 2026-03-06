@@ -1,87 +1,103 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.Invoice;
 import models.PreviewDetails;
 import org.openqa.selenium.WebDriver;
 
 public class Harness {
   private final WebDriver driver;
+  private DashboardPage dashboardPage;
 
   public Harness(WebDriver driver) {
     this.driver = driver;
+    dashboardPage = new DashboardPage(driver);
   }
 
+  @Step("Log in")
   public boolean login(String username, String password) {
     new HomePage(driver).clickLogin();
     new PracticePage(driver).login(username, password);
-    DashboardPage dashboardPage = new DashboardPage(driver);
-
     return dashboardPage.dashboardWelcomeMessageDisplays();
   }
 
+  @Step("Go to inventory form")
   public boolean goToInventoryForm() {
-    return new DashboardPage(driver).inventoryFormDisplays();
+    return dashboardPage.inventoryFormDisplays();
   }
 
+  @Step("Select device: {device}")
   public boolean selectDevice(String device) {
-    return new DashboardPage(driver).selectDeviceTypeToEnableBrandDropdown(device);
+    return dashboardPage.selectDeviceTypeToEnableBrandDropdown(device);
   }
 
+  @Step("Select brand: {brand}")
   public boolean selectBrand(String brand) {
-    return new DashboardPage(driver).selectBrandToShowDevicePreview(brand);
+    return dashboardPage.selectBrandToShowDevicePreview(brand);
   }
 
+  @Step("Select storage: {storage}")
   public String selectStorage(String storage) {
     // storage is unused since it's not clear where the price comes from.
-    return new DashboardPage(driver).selectStorageReturnsUnitPrice();
+    return dashboardPage.selectStorageReturnsUnitPrice();
   }
 
   public String getUnitPrice(String storage) {
     // storage is unused since it's not clear where the price comes from.
-    return new DashboardPage(driver).getUnitPrice();
+    return dashboardPage.getUnitPrice();
   }
 
+  @Step("Select colour: {colour}")
   public String selectColour(String colour) {
-    return new DashboardPage(driver).selectColourToShowColourLabel(colour);
+    return dashboardPage.selectColourToShowColourLabel(colour);
   }
 
+  @Step("Update device quantity to {quantity}")
   public String updateDeviceQuantity(int quantity) {
-    return new DashboardPage(driver).subtotalUpdatesWhenEnteringQuantity(quantity);
+    return dashboardPage.subtotalUpdatesWhenEnteringQuantity(quantity);
   }
 
   public String getSubtotal() {
-    return new DashboardPage(driver).getSubtotal();
+    return dashboardPage.getSubtotal();
   }
 
+  @Step("Enter address {address}")
   public String enterAddress(String address) {
-    return new DashboardPage(driver).setAddress(address);
+    return dashboardPage.setAddress(address);
   }
 
+  @Step("Go to order review")
   public PreviewDetails clickNextAndGetPreview(String brand, String colour, String storage) {
-    return new DashboardPage(driver).clickNextShowsOrderReview(brand, colour, storage);
+    return dashboardPage.clickNextShowsOrderReview(brand, colour, storage);
   }
 
+  @Step("Add express shipping")
   public String addExpressShipping() {
-    return new DashboardPage(driver).addExpressShippingIncreasesTotalCost();
+    return dashboardPage.addExpressShippingIncreasesTotalCost();
   }
 
+  @Step("Add 1 year warranty")
   public String addOneYearWarranty() {
-    return new DashboardPage(driver).addOneYearWarrantyIncreasesTotalCost();
+    return dashboardPage.addOneYearWarrantyIncreasesTotalCost();
   }
 
+  @Step("Apply SAVE10 discount code")
   public String useSAVE10discountCode() {
-    return new DashboardPage(driver).applyDiscount();
+    return dashboardPage.applyDiscount();
   }
 
+  @Step("Confirm purchase")
   public String confirmPurchase() {
-    return new DashboardPage(driver).confirmPurchaseShowsSuccessToast();
+    return dashboardPage.confirmPurchaseShowsSuccessToast();
   }
 
+  @Step("Open invoice history")
   public String viewInvoiceHistory() {
-    return new DashboardPage(driver).clickInvoiceButtonShowsInvoiceHistory();
+    return dashboardPage.clickInvoiceButtonShowsInvoiceHistory();
   }
 
+  @Step("Open latest invoice")
   public Invoice viewLatestInvoice() {
-    return new DashboardPage(driver).openLatestInvoice();
+    return dashboardPage.openLatestInvoice();
   }
 }

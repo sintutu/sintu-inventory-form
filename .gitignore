@@ -41,3 +41,8 @@ target/
 
 
 .vscode/
+
+# Allure
+.allure/
+allure-results/
+allure-report/
