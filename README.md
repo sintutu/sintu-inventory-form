@@ -12,8 +12,21 @@ There are two forms in the [assignment directory](./assignments):
 Clone the repo and run tests from repo root with 
 
 ```shell
-mvn -f ./shop-basic/pom.xml test
+mvn -f ./shop-basic/pom.xml clean test
 ```
+## Report
+
+Generate reports with 
+
+```shell
+mvn -f ./shop-basic/pom.xml allure:report
+```
+and serve with 
+
+```shell
+mvn -f ./shop-basic/pom.xml allure:serve
+```
+which renders in your web browser.
 
 ## Read more
 
@@ -22,6 +35,3 @@ Apply Google formatting styles with
 ```shell
 mvn -f ./shop-basic/pom.xml com.spotify.fmt:fmt-maven-plugin:format
 ```
-
-This is to be implemented in pipeline at a later stage.
-
