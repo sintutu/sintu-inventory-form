@@ -22,7 +22,6 @@ public class InvoicePage extends BasePage {
 
   public Invoice readInvoice() {
     wait.until(ExpectedConditions.visibilityOf(thankYouOnInvoice));
-    String title = driver.getTitle();
 
     WebElement row = driver.findElement(By.xpath("//table//tr[contains(.,'Apple')]"));
     String fullDescription = row.findElement(By.xpath("./td[1]")).getText();
