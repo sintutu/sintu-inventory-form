@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class InvoicePage extends BasePage {
+class InvoicePage extends BasePage {
   private final WebDriver driver;
 
   public InvoicePage(WebDriver driver) {

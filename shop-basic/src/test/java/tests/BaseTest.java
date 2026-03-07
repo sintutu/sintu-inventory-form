@@ -6,9 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import pages.Harness;
 import utilities.BrowserFactory;
 
-public abstract class BaseTest {
+abstract class BaseTest {
 
-  protected WebDriver driver;
+  private WebDriver driver;
 
   protected Harness app;
 

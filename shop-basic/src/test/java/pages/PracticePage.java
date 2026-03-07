@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class PracticePage extends BasePage {
+class PracticePage extends BasePage {
 
   public PracticePage(WebDriver driver) {
     super(driver);

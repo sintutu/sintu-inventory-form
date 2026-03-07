@@ -6,6 +6,7 @@ import static utilities.Formatters.parseCurrency;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import models.Constants;
 import models.Invoice;
 import models.PreviewDetails;
 import org.openqa.selenium.*;
@@ -13,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-public class DashboardPage extends BasePage {
+class DashboardPage extends BasePage {
   private final WebDriver driver;
 
   public DashboardPage(WebDriver driver) {

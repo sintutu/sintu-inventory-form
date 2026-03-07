@@ -1,4 +1,4 @@
-package pages;
+package models;
 
 public class Constants {
   public static final double APPLE_PHONE_UNIT_PRICE = 480;
